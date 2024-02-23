@@ -18,6 +18,7 @@ Airline delays are a frustration for passengers, and there are few resources ava
 
 ### (Potential) Results and Discussion
 ### 3+ Quantitative Metrics
++ If we persist with a linear regression model, **mean-squared error (MSE)** is a simple but effective way of calculating accuracy. Since MSE heavily penalizes incorrectness, it will be challenging to achieve a low MSE value.
 + 
 ###
 
@@ -33,7 +34,7 @@ Airline delays are a frustration for passengers, and there are few resources ava
 ## Team Contribution Table
 | Name  | Proposal Contributions |
 | ------------- | ------------- |
-| Addy Yang  | Report sections 1, 3, and 4, creating Github.io page, Gantt chart  |
+| Addy Yang  | Report sections 1, 3, and 5, creating Github.io page, Gantt chart  |
 | Rohan Bhagat  | Content Cell  |
 | Dhruv Shrivastava  | Content Cell  |
 | Aidan Pratt  | Content Cell  |
