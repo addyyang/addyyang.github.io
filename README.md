@@ -15,3 +15,12 @@ Airline delays are a frustration for passengers, and there are few resources ava
 ## (Potential) Results and Discussion
 ### 3+ Quantitative Metrics
 ###
+
+## Team Contribution Table
+| Name  | Proposal Contributions |
+| ------------- | ------------- |
+| Addy Yang  | Report sections 1 \\ section2?  |
+| Rohan Bhagat  | Content Cell  |
+| Dhruv Shrivastava  | Content Cell  |
+| Aidan Pratt  | Content Cell  |
+| Teddy Feldman  | Content Cell  |
