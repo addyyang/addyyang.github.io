@@ -9,28 +9,29 @@ Airline delays are a frustration for passengers, and there are few resources ava
 
 ### Methods
 #### Data Preprocessing Methods
-+ **Data cleaning** will ensure that our data is free of outliers or incorrect data: a necessary precaution given we will be sourcing our data from the internet. Methods in the Pandas library, like dropna() and drop_duplicates(), will allow us to do this effectively.
-+ We will use **feature transformation** to place greater emphasis on features that likely have a greater impact on delays, like precipitation, and limit the impact of skewed data. For example, we may use the log transformation technique from scikit-learn to normalize right-skewed distributions.
-+ We will use **dimensionality reduction** to prevent overfitting and ensure that the size of our dataset is not too large to work with, while still considering the impact of eliminating features on the accuracy of our model \[2\].
++ **Data cleaning** will ensure that our data is free of outliers or incorrect/null data. Methods in the Pandas library, like dropna() and drop_duplicates(), will allow us to do this effectively.
++ We will use **feature transformation** to adjust data to best fit the strengths, weaknesses, and biases of our model/dataset. For example, we may use the log transformation technique from scikit-learn to normalize right-skewed distributions.
++ We will use **dimensionality reduction** to prevent overfitting while still considering the impact of eliminating features on the accuracy of our model \[2\].
 
 #### ML Algorithms/Models (supervised only)
-+ **Gradient-boosted decision trees** are a popular and effective model for flight delay predictors, and are suitable for our project because of their high accuracy, and ability to provide useful insight on which features contribute heaviest to flight delays \[3\]
-+ If predicting a continuous target variable proves to be too difficult, and/or we decide we want to predict the delay time in intervals, then we plan to use **hierarchical clustering** to determine the ideal size and number of intervals to accurately predict delays (e.g. 0-10 min delay, or 0-30 min delay?).
++ **Gradient-boosted decision trees** are a popular and effective model for flight delay predictors, and are suitable for our project because of their ability to accurately which features contribute most heavily to flight delays \[3\]
++ In a second approach, we plan to use **hierarchical clustering** to determine the ideal size and number of intervals to accurately predict delays (e.g. 0-10 min delay, or 0-30 min delay?).
 + Finally, for our binary classification approach, we plan to use support vector machines to best divide flights where a delay will and will not likely occur.
 
 ### (Potential) Results and Discussion
 ### 3+ Quantitative Metrics
-+ If we persist with a linear regression model, **mean-squared error (MSE)** is a simple but effective way of calculating our accuracy while incentivizing few large errors (i.e. predicting no delay when in fact a 24-hour delay occurred).
-+ We will also consider **mean absolute deviation (MAD)**, another standard measure of the accuracy of regression models. However, since small differences between our model's prediction for a flight delay and the true flight delay (i.e. 30 vs 45 mins) are not terribly important, we will prioritize minimizing MSE, which is more punitive of large residuals than MAD, thereby creating more helpful predictions.
-+ For our binary classification approach, we plan to use the F1 score to evaluate accuracy.
++ For a linear regression model, **mean-squared error (MSE)** will effectively measure our accuracy while incentivizing few large errors (i.e. predicting no delay when in fact a 24-hour delay occurred).
++ We will also consider **mean absolute deviation (MAD)**, another standard measure of the accuracy of regression models. However, we will prioritize minimizing MSE, which is more punitive of exceptionally large residuals than MAD, thereby creating more helpful predictions.
++ For our clustering and classification approaches, we will consider Rand Score and F1 score to evaluate accuracy.
+  
 ### Project Goals
 + Create a regression model that accurately predicts length of flight delays -> ex. Adjusted R2 > ~0.9 (dependent on MSE)
-+ Create an accurate binary classification model that predicts existence of flight delays -> ex. F1 score > ~ 0.75
++ Create an accurate classification model that predicts existence of flight delays -> ex. F1 score > ~ 0.75
 
 ### Expected Results
 + Identify the biggest reasons for flight delays across our datasets.
 + Predict flight delays with accuracy that will help travelers.
-+ Determine whether length of flight delay or existence of a delay is easier, and thus more helpful, to accurately predict.
++ Determine whether length or existence of a delay is easier to accurately predict.
 
 ### References
 \[1\] H. Khaksar and A. Sheikholeslami, “Airline delay prediction by machine learning algorithms,” Scientia Iranica, vol. 0, no. 0, pp. 0–0, Dec. 2017. doi:10.24200/sci.2017.20020 
@@ -45,7 +46,7 @@ Airline delays are a frustration for passengers, and there are few resources ava
 | Name  | Proposal Contributions |
 | ------------- | ------------- |
 | Addy Yang  | Report sections 1, 3, and 5, creating Github.io page, Gantt chart  |
-| Rohan Bhagat  | Report section 5, Video Presentation  |
+| Rohan Bhagat  | Report sections 1-4, Video Presentation  |
 | Dhruv Shrivastava  | Created Google Slides Presentation, Report Section 4  |
-| Aidan Pratt  | Project Idea, References, Video Presentation, Google Slides  |
-| Teddy Feldman  | Content Cell  |
+| Aidan Pratt  | Project Idea, Video Presentation, Google Slides |
+| Teddy Feldman  | Report Sections 1-5 |
