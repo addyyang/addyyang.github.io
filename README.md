@@ -21,7 +21,16 @@ Airline delays are a frustration for passengers, and there are few resources ava
 ### 3+ Quantitative Metrics
 + If we persist with a linear regression model, **mean-squared error (MSE)** is a simple but effective way of calculating accuracy. Since MSE heavily penalizes incorrectness, it will be challenging to achieve a low MSE value.
 + We will also consider **mean absolute deviation (MAD)**, another standard measure of the accuracy of regression models. However, since small differences between our model's prediction for a flight delay and the true flight delay (i.e. 30 mins vs 45 mins) are not terribly important, we will prioritize minimizing MSE, which is more punitive of large residuals than MAD, thereby creating more helpful predictions.
-###
+### Project Goals
++ Create a regression model that accurately predicts length of flight delays -> Adjusted R2 > ~0.9
++ Create an accurate binary classification model that predicts existence of flight delays
+-> F1 score > ~ 0.75
++ Want to analyze historical flight data that includes weather conditions, route information (e.g. airport of arrival/departure, airline type, airplane model, etc),  and expected departure/arrival versus actual departure/arrival
+
+### Expected Results
++ Figure out the best prediction times for flights and what causes potential delays of the variables we have selected to test in our goals and methods 
++ Identify the top three reasons for flight delays across our datasets
++ Determine whether length of flight delay or existence of a delay is easier to predict.
 
 ### References
 \[1\] H. Khaksar and A. Sheikholeslami, “Airline delay prediction by machine learning algorithms,” Scientia Iranica, vol. 0, no. 0, pp. 0–0, Dec. 2017. doi:10.24200/sci.2017.20020 
