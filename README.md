@@ -2,23 +2,23 @@
 
 ### Introduction/Background
 There exist sites, like https://wingman.wtf/ and https://www.knowdelay.com/index.html that predict flight delays but are often too inaccurate to fully rely on. Scholarly articles that detail the use of ML in predicting flight delays generally focus on a single airport or airline, and use regression models like decision trees \[1\]. 
-We plan on approaching this problem in several ways, with a more expansive dataset that details predicted vs. actual departure times of previous flights, airlines, # of passengers (including seats oversold and passengers on standby), weather (eg. temperature, precipitation, fog), flight volume at airports, and aircraft type (eg. age, size). We also plan to look at this problem at multiple scales, using regression, clustering, and classification techniques to predict the exact length of flight delays, category of delay (i.e. <30 mins, 30-60 mins, etc.), and simply the existence of a delay.
+We plan on approaching this problem in several ways, with a more expansive dataset that details predicted vs. actual departure times of previous flights, airlines, # of passengers, weather, airport flight volume, and aircraft age and size. We also plan to analyze this problem at multiple scales, using regression, clustering, and classification techniques to predict the length of flight delays, category of delay (i.e. <30 mins, 30-60 mins, etc.), and simply existence of delay.
 
 ### Problem Definition
 Airline delays are a frustration for passengers, and there are few resources available to accurately forecast potential delays. Our motivation is to help travelers determine when delays are most likely to occur, and airports and airlines provide more reliable information about their operations.
 
 ### Methods
 #### Data Preprocessing Methods
-+ **Data cleaning** will ensure that our data is free of outliers or incorrect/null data. Methods in the Pandas library, like dropna() and drop_duplicates(), will allow us to do this effectively.
-+ We will use **feature transformation** to adjust data to best fit the strengths, weaknesses, and biases of our model/dataset. For example, we may use the log transformation technique from scikit-learn to normalize right-skewed distributions.
++ **Data cleaning** will ensure that our data is free of outliers or incorrect/null data. We'll use the Pandas library, including dropna() and drop_duplicates(), to do this effectively.
++ We will use **feature transformation** to adjust data to best fit the strengths, weaknesses, and biases of our model/dataset. For example, we may use the log transformation technique from scikit-learn to normalize right-skewed data.
 + We will use **dimensionality reduction** to prevent overfitting while still considering the impact of eliminating features on the accuracy of our model \[2\].
 
 #### ML Algorithms/Models (supervised only)
-+ **Gradient-boosted decision trees** are a popular and effective model for flight delay predictors, and are suitable for our project because of their ability to accurately which features contribute most heavily to flight delays \[3\]
++ **Gradient-boosted decision trees** are an effective model for flight delay predictors, and are suitable for our project because of their ability to accurately which features contribute most to flight delays \[3\]
 + In a second approach, we plan to use **hierarchical clustering** to determine the ideal size and number of intervals to accurately predict delays (e.g. 0-10 min delay, or 0-30 min delay?).
 + Finally, for our binary classification approach, we plan to use **support vector machines** to best divide flights where a delay will and will not likely occur.
 
-### (Potential) Results and Discussion
+### Potential Results and Discussion
 ### 3+ Quantitative Metrics
 + For a linear regression model, **mean-squared error (MSE)** will effectively measure our accuracy while incentivizing few large errors (i.e. predicting no delay when in fact a 24-hour delay occurred).
 + We will also consider **mean absolute deviation (MAD)**. However, we will prioritize minimizing MSE, which is more punitive of exceptionally large residuals than MAD, thereby creating more helpful predictions.
