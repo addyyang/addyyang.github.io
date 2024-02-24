@@ -9,9 +9,9 @@ Airline delays are a frustration for passengers, and there are few resources ava
 
 ### Methods
 #### Data Preprocessing Methods
-+ **Data cleaning** will ensure that our data is free of outliers or incorrect data: a necessary precaution given we will be sourcing our data from the internet.
-+ We will use **feature transformation** to place higher emphasis on features that likely have a greater impact on delays, like precipitation.
-+ We will use **dimensionality reduction** to ensure that the size of our dataset is not too large to work with, but conisdering the impact of eliminating features on the accuracy of our model \[2\].
++ **Data cleaning** will ensure that our data is free of outliers or incorrect data: a necessary precaution given we will be sourcing our data from the internet. Methods in the Pandas library, like dropna() and drop_duplicates(), will allow us to do this effectively.
++ We will use **feature transformation** to place greater emphasis on features that likely have a greater impact on delays, like precipitation, and limit the impact of skewed data. For example, we may use the log transformation technique from scikit-learn to normalize right-skewed distributions.
++ We will use **dimensionality reduction** to prevent overfitting and ensure that the size of our dataset is not too large to work with, while still considering the impact of eliminating features on the accuracy of our model \[2\].
 
 #### ML Algorithms/Models (supervised only)
 + **Gradient-boosted decision trees** are a popular and effective model for flight delay predictors, and are suitable for our project because of their high accuracy, and ability to provide useful insight on which features contribute heaviest to flight delays \[3\]
@@ -20,7 +20,7 @@ Airline delays are a frustration for passengers, and there are few resources ava
 ### (Potential) Results and Discussion
 ### 3+ Quantitative Metrics
 + If we persist with a linear regression model, **mean-squared error (MSE)** is a simple but effective way of calculating accuracy. Since MSE heavily penalizes incorrectness, it will be challenging to achieve a low MSE value.
-+ 
++ We will also consider **mean absolute deviation (MAD)**, another standard measure of the accuracy of regression models. However, since small differences between our model's prediction for a flight delay and the true flight delay (i.e. 30 mins vs 45 mins) are not terribly important, we will prioritize minimizing MSE, which is more punitive of large residuals than MAD, thereby creating more helpful predictions.
 ###
 
 ### References
