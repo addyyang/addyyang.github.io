@@ -38,5 +38,5 @@ Airline delays are a frustration for passengers, and there are few resources ava
 | Addy Yang  | Report sections 1, 3, and 5, creating Github.io page, Gantt chart  |
 | Rohan Bhagat  | Report section 5, Video Presentation  |
 | Dhruv Shrivastava  | Video Presentation  |
-| Aidan Pratt  | Content Cell  |
+| Aidan Pratt  | Project Idea, References, Video Presentation, Google Slides  |
 | Teddy Feldman  | Content Cell  |
