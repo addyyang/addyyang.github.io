@@ -5,7 +5,7 @@ There exist sites, like https://wingman.wtf/ and https://www.knowdelay.com/index
 We plan on approaching this problem in several ways, with a more expansive dataset that details predicted vs. actual departure times of previous flights, airlines, # of passengers, weather, airport flight volume, and aircraft age and size. We also plan to analyze this problem at multiple scales, using regression, clustering, and classification techniques to predict the length of flight delays, category of delay (i.e. <30 mins, 30-60 mins, etc.), and simply existence of delay.
 
 ### Problem Definition
-Airline delays are a frustration for passengers, and there are few resources available to accurately forecast potential delays. Our motivation is to help travelers determine when delays are most likely to occur, and airports and airlines provide more reliable information about their operations.
+Airline delays are a frustration for passengers, and because of the few resources available to accurately forecast potential delays, through this project, we aim to help travelers determine when delays are most likely to occur, and airports and airlines provide more reliable information about their operations.
 
 ### Methods
 #### Data Preprocessing Methods
