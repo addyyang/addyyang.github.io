@@ -16,6 +16,7 @@ Airline delays are a frustration for passengers, and there are few resources ava
 #### ML Algorithms/Models (supervised only)
 + **Gradient-boosted decision trees** are a popular and effective model for flight delay predictors, and are suitable for our project because of their high accuracy, and ability to provide useful insight on which features contribute heaviest to flight delays \[3\]
 + If predicting a continuous target variable proves to be too difficult, and/or we decide we want to predict the delay time in intervals, then we plan to use **hierarchical clustering** to determine the ideal size and number of intervals to accurately predict delays (e.g. 0-10 min delay, or 0-30 min delay?).
++ Finally, for our binary classification approach, we plan to use support vector machines to best divide flights where a delay will and will not likely occur.
 
 ### (Potential) Results and Discussion
 ### 3+ Quantitative Metrics
