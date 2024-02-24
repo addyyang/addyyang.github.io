@@ -12,6 +12,7 @@ Airline delays are a frustration for passengers, and there are few resources ava
 + **Data cleaning** will ensure that our data is free of outliers or incorrect data: a necessary precaution given we will be sourcing our data from the internet.
 + We will use **feature transformation** to place higher emphasis on features that likely have a greater impact on delays, like precipitation.
 + We will use **dimensionality reduction** to ensure that the size of our dataset is not too large to work with, but conisdering the impact of eliminating features on the accuracy of our model \[2\].
+
 #### ML Algorithms/Models (supervised only)
 + **Gradient-boosted decision trees** are a popular and effective model for flight delay predictors, and are suitable for our project because of their high accuracy, and ability to provide useful insight on which features contribute heaviest to flight delays \[3\]
 + If predicting a continuous target variable proves to be too difficult, and/or we decide we want to predict the delay time in intervals, then **hierarchical clustering** would be a good start, to give us an idea of how many buckets are ideal, since we are not sure how small/large the intervals will be for a good balance of accuracy and correctness (eg. 0-10 min delay, or 0-30 min delay?).
@@ -35,7 +36,7 @@ Airline delays are a frustration for passengers, and there are few resources ava
 | Name  | Proposal Contributions |
 | ------------- | ------------- |
 | Addy Yang  | Report sections 1, 3, and 5, creating Github.io page, Gantt chart  |
-| Rohan Bhagat  | Content Cell  |
+| Rohan Bhagat  | Report section 5, Video Presentation  |
 | Dhruv Shrivastava  | Content Cell  |
 | Aidan Pratt  | Content Cell  |
 | Teddy Feldman  | Content Cell  |
