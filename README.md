@@ -5,7 +5,7 @@ There exist sites, like https://wingman.wtf/ and https://www.knowdelay.com/index
 We plan on approaching this problem in several ways, with a more expansive dataset that details predicted vs. actual departure times of previous flights, airlines, # of passengers (including seats oversold and passengers on standby), weather (eg. temperature, precipitation, fog), flight volume at airports, and aircraft type (eg. age, size). We also plan to look at this problem at multiple scales, using regression, clustering, and classification techniques to predict the exact length of flight delays, category of delay (i.e. <30 mins, 30-60 mins, etc.), and simply the existence of a delay.
 
 ### Problem Definition
-Airline delays are a frustration for passengers, and there are few resources available to predict which routes, airlines, and/or airports commonly have the most delays. Our motivation is that travelers should know when delays are most likely to occur, so they can plan their travels accordingly, and help airports and airlines to provide more reliable information about their operations and improve service quality and customer satisfaction.
+Airline delays are a frustration for passengers, and there are few resources available to accurately forecast potential delays. Our motivation is to help travelers determine when delays are most likely to occur, and airports and airlines provide more reliable information about their operations.
 
 ### Methods
 #### Data Preprocessing Methods
@@ -16,13 +16,13 @@ Airline delays are a frustration for passengers, and there are few resources ava
 #### ML Algorithms/Models (supervised only)
 + **Gradient-boosted decision trees** are a popular and effective model for flight delay predictors, and are suitable for our project because of their ability to accurately which features contribute most heavily to flight delays \[3\]
 + In a second approach, we plan to use **hierarchical clustering** to determine the ideal size and number of intervals to accurately predict delays (e.g. 0-10 min delay, or 0-30 min delay?).
-+ Finally, for our binary classification approach, we plan to use support vector machines to best divide flights where a delay will and will not likely occur.
++ Finally, for our binary classification approach, we plan to use **support vector machines** to best divide flights where a delay will and will not likely occur.
 
 ### (Potential) Results and Discussion
 ### 3+ Quantitative Metrics
 + For a linear regression model, **mean-squared error (MSE)** will effectively measure our accuracy while incentivizing few large errors (i.e. predicting no delay when in fact a 24-hour delay occurred).
-+ We will also consider **mean absolute deviation (MAD)**, another standard measure of the accuracy of regression models. However, we will prioritize minimizing MSE, which is more punitive of exceptionally large residuals than MAD, thereby creating more helpful predictions.
-+ For our clustering and classification approaches, we will consider Rand Score and F1 score to evaluate accuracy.
++ We will also consider **mean absolute deviation (MAD)**. However, we will prioritize minimizing MSE, which is more punitive of exceptionally large residuals than MAD, thereby creating more helpful predictions.
++ For our clustering and classification approaches, we will consider **Rand Score** and **F1 score** to evaluate accuracy.
   
 ### Project Goals
 + Create a regression model that accurately predicts length of flight delays -> ex. Adjusted R2 > ~0.9 (dependent on MSE)
