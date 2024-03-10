@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS4641 Project Proposal: Flight Delay Predictor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+
+        h1, h2, h3 {
+            margin-bottom: 10px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>CS4641 Project Proposal: Flight Delay Predictor</h1>
+
+    <h3>Introduction/Background</h3>
+    <p>There exist sites, like <a href="https://wingman.wtf/">wingman.wtf</a> and <a href="https://www.knowdelay.com/index.html">knowdelay.com</a> that predict flight delays but are often too inaccurate to fully rely on. Scholarly articles that detail the use of ML in predicting flight delays generally focus on a single airport or airline, and use regression models like decision trees <sup>[1]</sup>.</p>
+
+    <h3>Problem Definition</h3>
+    <p>Airline delays are a frustration for passengers, and because of the few resources available to accurately forecast potential delays, through this project, we aim to help travelers determine when delays are most likely to occur, and airports and airlines provide more reliable information about their operations.</p>
+
+    <h3>Methods</h3>
+    <h4>Data Preprocessing Methods</h4>
+    <ul>
+        <li>Data cleaning: will ensure that our data is free of outliers or incorrect/null data. We'll use the Pandas library, including dropna() and drop_duplicates(), to do this effectively.</li>
+        <li>Feature transformation: to adjust data to best fit the strengths, weaknesses, and biases of our model/dataset. For example, we may use the log transformation technique from scikit-learn to normalize right-skewed data.</li>
+        <li>Dimensionality reduction: to prevent overfitting while still considering the impact of eliminating features on the accuracy of our model <sup>[2]</sup>.</li>
+    </ul>
+
+    <h4>ML Algorithms/Models (supervised only)</h4>
+    <ul>
+        <li>Gradient-boosted decision trees</li>
+        <li>Hierarchical clustering</li>
+        <li>Support vector machines</li>
+    </ul>
+
+    <h3>Potential Results and Discussion</h3>
+    <h4>3+ Quantitative Metrics</h4>
+    <ul>
+        <li>Mean-squared error (MSE)</li>
+        <li>Mean absolute deviation (MAD)</li>
+        <li>Rand Score and F1 score</li>
+    </ul>
+
+    <h3>Project Goals</h3>
+    <p>Create a regression model that accurately predicts length of flight delays, and create an accurate classification model that predicts existence of flight delays.</p>
+
+    <h3>Expected Results</h3>
+    <ul>
+        <li>Identify the biggest reasons for flight delays across our datasets.</li>
+        <li>Predict flight delays with accuracy that will help travelers.</li>
+        <li>Determine whether length or existence of a delay is easier to accurately predict.</li>
+    </ul>
+
+    <h3>References</h3>
+    <ol>
+        <li>H. Khaksar and A. Sheikholeslami, “Airline delay prediction by machine learning algorithms,” Scientia Iranica, vol. 0, no. 0, pp. 0–0, Dec. 2017. doi:10.24200/sci.2017.20020</li>
+        <li>H. S. Obaid, S. A. Dheyab and S. S. Sabry, "The Impact of Data Pre-Processing Techniques and Dimensionality Reduction on the Accuracy of Machine Learning," 2019 9th Annual Information Technology, Electromechanical Engineering and Microelectronics Conference (IEMECON), Jaipur, India, 2019, pp. 279-283, doi: 10.1109/IEMECONX.2019.8877011.</li>
+        <li>S. Manna, S. Biswas, R. Kundu, S. Rakshit, P. Gupta and S. Barman, "A statistical approach to predict flight delay using gradient boosted decision tree," 2017 International Conference on Computational Intelligence in Data Science(ICCIDS), Chennai, India, 2017, pp. 1-5, doi: 10.1109/ICCIDS.2017.8272656.</li>
+    </ol>
+
+    <h2>Gantt Chart</h2>
+    <p><a href="https://docs.google.com/spreadsheets/d/1DOtCJ0PgNM5uBerABgMfCDr11GxqrQK8Jsl495TC0UA/edit?usp=sharing">Gantt Chart</a></p>
+
+    <h2>Team Contribution Table</h2>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Proposal Contributions</th>
+        </tr>
+        <tr>
+            <td>Addy Yang</td>
+            <td>Report sections 1, 3, and 5, creating Github.io page, Gantt chart</td>
+        </tr>
+        <tr>
+            <td>Rohan Bhagat</td>
+            <td>Report sections 1-4, Video Presentation</td>
+        </tr>
+        <tr>
+            <td>Dhruv Shrivastava</td>
+            <td>Created Google Slides Presentation, Report Section 4</td>
+        </tr>
+        <tr>
+            <td>Aidan Pratt</td>
+            <td>Project Idea, Video Presentation, Google Slides</td>
+        </tr>
+        <tr>
+            <td>Teddy Feldman</td>
+            <td>Report Sections 1-5</td>
+        </tr>
+    </table>
+</body>
+</html>
