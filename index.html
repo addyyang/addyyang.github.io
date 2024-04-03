@@ -30,8 +30,89 @@
             background-color: #f2f2f2;
         }
     </style>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
+    <h1>CS4641 Project Midterm: Flight Delay Predictor</h1>
+
+    <h3>Introduction/Background</h3>
+    <p>There exist sites, like <a href="https://wingman.wtf/">wingman.wtf</a> and <a href="https://www.knowdelay.com/index.html">knowdelay.com</a> that predict flight delays but are often too inaccurate to fully rely on. Scholarly articles that detail the use of ML in predicting flight delays generally focus on a single airport or airline, and use regression models like decision trees [1].</p>
+
+    <h3>Problem Definition</h3>
+    <p>Airline delays are a frustration for passengers, and because of the few resources available to accurately forecast potential delays, through this project, we aim to help travelers determine when delays are most likely to occur, and airports and airlines provide more reliable information about their operations.</p>
+
+    <h3>Methods</h3>
+    <h4>Data Preprocessing Methods</h4>
+    <ul>
+        <li><b>Data cleaning</b> was used to remove data points with blank entries for any attribute to ensure that we can use the entire data set as either training or testing data for any models implemented. The dropna function from the pandas library was used to do this.</li>
+        <li><b>Feature transformation</b> was used to scale the datetime data to two different ranges. The first scales the date (less the year) to a point on the unit circle with radius 1. The other maps the date to a value between 0 and 1, where closer to 0 is closer to the middle of winter and closer to 1 is closer to the middle of summer. Each airline's code was also mapped to a distinct number between 0 and 1.</li>
+        <li><b>Dimensionality reduction</b> was used to reduce the dataset to just a few essential attributes: to prevent overfitting while still considering the impact of eliminating features on the accuracy of our model [2]. We removed such attributes as origin city, amount of snow, and taxi out time. Overall we were left with the following columns: FL_DATE, AIRLINE_CODE, DEP_TIME, AIR_TIME, DISTANCE, DELAY, DEST_LAT, DEST_LNG, ORIGIN_LAT, ORIGIN_LNG, ARR_PRECIPITATION, ARR_SNOW_DEPTH. The reduced dataset makes it easier to determine which categories may hold a statistical relationship, though not all would be used in the same model (most likely) to prevent overrfitting.</li>
+    </ul>
+
+    <h4>Implemented model</h4>
+    <ul>
+        <li><b>Linear regression</b> was implemented to attempt to predict the delay of a flight given information from the attributes above. Two trials were run: one with all 11 features present, and the other with just 7. The 7 most important feature were selected by performing forward feature selection on the training data. The regression model was then fit to each of the two sets of training data, then used to predict delays for the remaining 20% of the data (test set). The initial 80% of the data was the training set. Scikit-learn was the library used for this implementation.</li>
+    </ul>
+
+    <h3>Results and Discussion</h3>
+    <h4>Analysis of Regression Model</h4>
+    <ul>
+        <li>For a linear regression model, <b>mean-squared error (MSE)</b> will effectively measure our accuracy while incentivizing few large errors (i.e. predicting no delay when in fact a 24-hour delay occurred).</li>
+        <li>The mean square error (MSE) of the model run with all 11 features was 5333.013819648823, while the coefficient of determination ($R^2$) was 0.020891585241412658. The MSE of the model with 7 features was 5369.736086878915, while the $R^2$ was 0.014149603677156453, indicating that 11 features is a better fit. However, all of these error values are very high, indicating that linear regression is likely not a good model to use for predicting flight delays.</li>
+        <li>The following chart shows the actual vs predicted flight delays resulting from our model. While many of the delays are nearly accurate, there are also a significant proportion of outliers and points lying off the y=x line (100% accurate).</li>
+    </ul>
+
+    <h3>Project Goals</h3>
+        <li>Create a regression model that accurately predicts length of flight delays -> ex. Adjusted R2 > ~0.9 (dependent on MSE)</li>
+        <li>Create an accurate classification model that predicts existence of flight delays -> ex. F1 score > ~ 0.75</li>
+        <img src="plot1.png">
+        <li>This chart shows the residuals (target value minus predicted value) for each predicted value. We can observe that the model consistently overestimates the predicted value, and this overestimation becomes greater as the predicted value increases (in a linear fashion). The units for the plot are minutes.</li>
+        <img src="plot2.png">
+        <li>The final chart shows a histogram of all residual values. The plot is denser just to the left of zero, therefore the residual value is less than 0 most of the time, again indicating overestimation of delay time. The units for the plot are minutes.</li>
+        <img src="plot3.png">
+        <li>In future analysis we may also consider the mean absolute deviation (MAD) to give all errors linear weighting, as opposed to MSE which weighs the errors by their square. In the flight delay application we need to balance having most of the predicted delays being accurate (MAD) with minimizing outliers (MSE). The units for the plot are minutes.</li>
+
+    <h3>Next Steps</h3>
+    <ul>
+        <li>Since our approach of directly predicting the length of flight delay did not yield promising results, we plan to now implement a clustering model that will instead predict the approximate length of a flight delay by placing flights into buckets (i.e. 0-30 minutes, 30-60 minutes, etc.). Currently we plan on using DBScan, as it is effective at eliminating noisy variables, which likely hurt the effectiveness of our regression model. By using DBScan, we hope to be able to filter out less useful data and identify outliers in our data that will produce a more accurate model than the linear regression, while still providing useful information to users, as the exact length of a flight delay is much less important to fliers than the relative length.</li>
+    </ul>
+
+    <h3>References</h3>
+        <p>[1] H. Khaksar and A. Sheikholeslami, “Airline delay prediction by machine learning algorithms,” Scientia Iranica, vol. 0, no. 0, pp. 0–0, Dec. 2017. doi:10.24200/sci.2017.20020</p>
+        <p>[2] H. S. Obaid, S. A. Dheyab and S. S. Sabry, "The Impact of Data Pre-Processing Techniques and Dimensionality Reduction on the Accuracy of Machine Learning," 2019 9th Annual Information Technology, Electromechanical Engineering and Microelectronics Conference (IEMECON), Jaipur, India, 2019, pp. 279-283, doi: 10.1109/IEMECONX.2019.8877011.</p>
+
+    <h2>Gantt Chart</h2>
+    <p><a href="https://docs.google.com/spreadsheets/d/1DOtCJ0PgNM5uBerABgMfCDr11GxqrQK8Jsl495TC0UA/edit?usp=sharing">Linked Here</a></p>
+
+    <h2>Team Contribution Table</h2>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Proposal Contributions</th>
+        </tr>
+        <tr>
+            <td>Addy Yang</td>
+            <td>Data preprocessing, initial implementation of linear regression</td>
+        </tr>
+        <tr>
+            <td>Rohan Bhagat</td>
+            <td>Adjustments to linear regression, report</td>
+        </tr>
+        <tr>
+            <td>Dhruv Shrivastava</td>
+            <td>Adjustments to linear regression, analysis</td>
+        </tr>
+        <tr>
+            <td>Aidan Pratt</td>
+            <td>Adjustments to linear regression, analysis</td>
+        </tr>
+        <tr>
+            <td>Teddy Feldman</td>
+            <td>Data preprocessing, report</td>
+        </tr>
+    </table>
+    <br>
     <h1>CS4641 Project Proposal: Flight Delay Predictor</h1>
 
     <h3>Introduction/Background</h3>
