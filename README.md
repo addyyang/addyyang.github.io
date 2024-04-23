@@ -11,6 +11,7 @@ Airline delays are a frustration for passengers, and because of the few resource
 + **Data cleaning** will ensured that our data is free of outliers or incorrect/null data. We'll use the Pandas library, including dropna() and drop_duplicates(), to do this effectively. We also deleted outlier datapoints with delays over 500 minutes. For regressors, we changed datapoints with "negative" delays (the plane arrived early to the destination) to zero, since we did not care about predicting early flights. 
 + We used **feature transformation** to adjust data to best fit the strengths, weaknesses, and biases of our model/dataset. For example, we used the log transformation technique from scikit-learn to normalize right-skewed data.
 + We used **dimensionality reduction** to prevent overfitting while still considering the impact of eliminating features on the accuracy of our model \[2\].
++ **Categorization**: When implementing random forest model, we assigned a category (e.g. DELAY, MINOR_DELAY, NO_DELAY, etc.) to each delay value (initially in minutes). This allowed us to use a group prediction algorithm, targeted on the delay value.
 
 #### ML Algorithms/Models (supervised only)
 + Our initial approach made use of **linear regression** to attempt to predict the number of minutes a flight will be delayed. We chose this because we wanted to attempt a regression task, and thought linear regression would be a simple and good introduction to creating models and experimening with optimization and using the libraries available.
