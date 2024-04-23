@@ -8,16 +8,17 @@ Airline delays are a frustration for passengers, and because of the few resource
 
 ### Methods
 #### Data Preprocessing Methods
-+ **Data cleaning** will ensure that our data is free of outliers or incorrect/null data. We'll use the Pandas library, including dropna() and drop_duplicates(), to do this effectively.
-+ We will use **feature transformation** to adjust data to best fit the strengths, weaknesses, and biases of our model/dataset. For example, we may use the log transformation technique from scikit-learn to normalize right-skewed data.
-+ We will use **dimensionality reduction** to prevent overfitting while still considering the impact of eliminating features on the accuracy of our model \[2\].
++ **Data cleaning** will ensured that our data is free of outliers or incorrect/null data. We'll use the Pandas library, including dropna() and drop_duplicates(), to do this effectively. We also deleted outlier datapoints with delays over 500 minutes. For regressors, we changed datapoints with "negative" delays (the plane arrived early to the destination) to zero. 
++ We used **feature transformation** to adjust data to best fit the strengths, weaknesses, and biases of our model/dataset. For example, we used the log transformation technique from scikit-learn to normalize right-skewed data.
++ We used **dimensionality reduction** to prevent overfitting while still considering the impact of eliminating features on the accuracy of our model \[2\].
 
 #### ML Algorithms/Models (supervised only)
-+ Our initial approach made use of **linear regression** to attempt to predict the number of minutes a flight will be delayed. We chose this because we wanted to attempt a regression task, and thought linear regression would be a good introduction to creating models.
-+ Finally, for our binary classification approach, we plan to use **support vector machines** to best divide flights where a delay will and will not likely occur.
-+ + **Random forests** are an effective model for flight delay predictors, and are suitable for our project because of their ability to accurately which features contribute most to flight delays \[3\]
++ Our initial approach made use of **linear regression** to attempt to predict the number of minutes a flight will be delayed. We chose this because we wanted to attempt a regression task, and thought linear regression would be a simple and good introduction to creating models and experimening with optimization and using the libraries available.
++ For our second approach, we attempted to use a **random forest** model to classify flights into buckets. In general, we thought random forests would be a suitable approach because of their [citation]
++ For our final approach, we used **gradient-boosting** to implement another regression method. We chose this model because of its power to handle non-linear relationships, which was the main problem with our first model. Gradient-boosted regressors are also able to provide insights into feature importance, which is helpful for our dataset due to the large amount of features we have [citation]. Finally, we chose this model because of its robustness to overfitting [https://cdn.techscience.cn/uploads/attached/file/20210520/20210520060421_37669.pdf], which was a prominent problem that we noticed in our previous two models.
 
 ### Potential Results and Discussion
++ For our linear regression model, two main trials were run: one with all features present, and the other with just 7. The 7 most important feature were selected by performing forward feature selection on the training data. The regression model was then fit to each of the two sets of training data, then used to predict delays for the remaining 20% of the data (test set). The initial 80% of the data was the training set. Scikit-learn was the library used for this implementation.
 ### 3+ Quantitative Metrics
 + For a linear regression model, **mean-squared error (MSE)** will effectively measure our accuracy while incentivizing few large errors (i.e. predicting no delay when in fact a 24-hour delay occurred).
 + We will also consider **mean absolute deviation (MAD)**. However, we will prioritize minimizing MSE, which is more punitive of exceptionally large residuals than MAD, thereby creating more helpful predictions.
