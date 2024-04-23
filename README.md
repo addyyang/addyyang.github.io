@@ -1,16 +1,4 @@
-# CS4641 Project Proposal: Flight Delay Predictor
-## Midterm checkpoint
-### Introduction/Background
-There exist sites, like https://wingman.wtf/ and https://www.knowdelay.com/index.html that predict flight delays but are often too inaccurate to fully rely on. Scholarly articles that detail the use of ML in predicting flight delays generally focus on a single airport or airline, and use regression models like decision trees \[1\]. 
-We plan on approaching this problem in several ways, with a more expansive dataset that details predicted vs. actual departure times of previous flights, airlines, # of passengers, weather, airport flight volume, and aircraft age and size. We also plan to analyze this problem at multiple scales, using regression, clustering, and classification techniques to predict the length of flight delays, category of delay (i.e. <30 mins, 30-60 mins, etc.), and simply existence of delay.
-
-### Problem Definition
-Airline delays are a frustration for passengers, and because of the few resources available to accurately forecast potential delays, through this project, we aim to help travelers determine when delays are most likely to occur, and airports and airlines provide more reliable information about their operations.
-
-### Method
-We chose to use data cleaning, feature encoding, and dimensionality reduction as our data preprocessing methods, and linear regression in our initial model. We needed data cleaning because the data we acquired had some blank entries which were causing errors in our algorithm, thus we replaced the blank entries with zeroes. We also wanted to use dimensionality reduction because our dataset had a 
-
-## Proposal
+# CS4641 Project Proposal: Flight Delay Predictor'
 ### Introduction/Background
 There exist sites, like https://wingman.wtf/ and https://www.knowdelay.com/index.html that predict flight delays but are often too inaccurate to fully rely on. Scholarly articles that detail the use of ML in predicting flight delays generally focus on a single airport or airline, and use regression models like decision trees \[1\]. 
 We plan on approaching this problem in several ways, with a more expansive dataset that details predicted vs. actual departure times of previous flights, airlines, # of passengers, weather, airport flight volume, and aircraft age and size. We also plan to analyze this problem at multiple scales, using regression, clustering, and classification techniques to predict the length of flight delays, category of delay (i.e. <30 mins, 30-60 mins, etc.), and simply existence of delay.
@@ -25,9 +13,9 @@ Airline delays are a frustration for passengers, and because of the few resource
 + We will use **dimensionality reduction** to prevent overfitting while still considering the impact of eliminating features on the accuracy of our model \[2\].
 
 #### ML Algorithms/Models (supervised only)
-+ **Gradient-boosted decision trees** are an effective model for flight delay predictors, and are suitable for our project because of their ability to accurately which features contribute most to flight delays \[3\]
-+ In a second approach, we plan to use **hierarchical clustering** to determine the ideal size and number of intervals to accurately predict delays (e.g. 0-10 min delay, or 0-30 min delay?).
++ Our initial approach made use of **linear regression** to attempt to predict the number of minutes a flight will be delayed. We chose this because we wanted to attempt a regression task, and thought linear regression would be a good introduction to creating models.
 + Finally, for our binary classification approach, we plan to use **support vector machines** to best divide flights where a delay will and will not likely occur.
++ + **Random forests** are an effective model for flight delay predictors, and are suitable for our project because of their ability to accurately which features contribute most to flight delays \[3\]
 
 ### Potential Results and Discussion
 ### 3+ Quantitative Metrics
