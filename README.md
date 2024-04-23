@@ -8,7 +8,7 @@ Airline delays are a frustration for passengers, and because of the few resource
 
 ### Methods
 #### Data Preprocessing Methods
-+ **Data cleaning** will ensured that our data is free of outliers or incorrect/null data. We'll use the Pandas library, including dropna() and drop_duplicates(), to do this effectively. We also deleted outlier datapoints with delays over 500 minutes. For regressors, we changed datapoints with "negative" delays (the plane arrived early to the destination) to zero. 
++ **Data cleaning** will ensured that our data is free of outliers or incorrect/null data. We'll use the Pandas library, including dropna() and drop_duplicates(), to do this effectively. We also deleted outlier datapoints with delays over 500 minutes. For regressors, we changed datapoints with "negative" delays (the plane arrived early to the destination) to zero, since we did not care about predicting early flights. 
 + We used **feature transformation** to adjust data to best fit the strengths, weaknesses, and biases of our model/dataset. For example, we used the log transformation technique from scikit-learn to normalize right-skewed data.
 + We used **dimensionality reduction** to prevent overfitting while still considering the impact of eliminating features on the accuracy of our model \[2\].
 
