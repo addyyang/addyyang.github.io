@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<!-- saved from url=(0027)https://addyyang.github.io/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS4641 Project: Flight Delay Predictor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+
+        h1, h2, h3 {
+            margin-bottom: 10px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+    <script src="./CS4641 Project_ Flight Delay Predictor_files/polyfill.min.js.download"></script>
+    <script id="MathJax-script" async="" src="./CS4641 Project_ Flight Delay Predictor_files/tex-mml-chtml.js.download"></script>
+<style type="text/css">.CtxtMenu_InfoClose {  top:.2em; right:.2em;}
+.CtxtMenu_InfoContent {  overflow:auto; text-align:left; font-size:80%;  padding:.4em .6em; border:1px inset; margin:1em 0px;  max-height:20em; max-width:30em; background-color:#EEEEEE;  white-space:normal;}
+.CtxtMenu_Info.CtxtMenu_MousePost {outline:none;}
+.CtxtMenu_Info {  position:fixed; left:50%; width:auto; text-align:center;  border:3px outset; padding:1em 2em; background-color:#DDDDDD;  color:black;  cursor:default; font-family:message-box; font-size:120%;  font-style:normal; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 15px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius:15px;               /* Safari and Chrome */  -moz-border-radius:15px;                  /* Firefox */  -khtml-border-radius:15px;                /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */  filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color="gray", Positive="true"); /* IE */}
+</style><style type="text/css">.CtxtMenu_MenuClose {  position:absolute;  cursor:pointer;  display:inline-block;  border:2px solid #AAA;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  font-family: "Courier New", Courier;  font-size:24px;  color:#F0F0F0}
+.CtxtMenu_MenuClose span {  display:block; background-color:#AAA; border:1.5px solid;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  line-height:0;  padding:8px 0 6px     /* may need to be browser-specific */}
+.CtxtMenu_MenuClose:hover {  color:white!important;  border:2px solid #CCC!important}
+.CtxtMenu_MenuClose:hover span {  background-color:#CCC!important}
+.CtxtMenu_MenuClose:hover:focus {  outline:none}
+</style><style type="text/css">.CtxtMenu_Menu {  position:absolute;  background-color:white;  color:black;  width:auto; padding:5px 0px;  border:1px solid #CCCCCC; margin:0; cursor:default;  font: menu; text-align:left; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 5px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius: 5px;             /* Safari and Chrome */  -moz-border-radius: 5px;                /* Firefox */  -khtml-border-radius: 5px;              /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */}
+.CtxtMenu_MenuItem {  padding: 1px 2em;  background:transparent;}
+.CtxtMenu_MenuArrow {  position:absolute; right:.5em; padding-top:.25em; color:#666666;  font-family: null; font-size: .75em}
+.CtxtMenu_MenuActive .CtxtMenu_MenuArrow {color:white}
+.CtxtMenu_MenuArrow.CtxtMenu_RTL {left:.5em; right:auto}
+.CtxtMenu_MenuCheck {  position:absolute; left:.7em;  font-family: null}
+.CtxtMenu_MenuCheck.CtxtMenu_RTL { right:.7em; left:auto }
+.CtxtMenu_MenuRadioCheck {  position:absolute; left: .7em;}
+.CtxtMenu_MenuRadioCheck.CtxtMenu_RTL {  right: .7em; left:auto}
+.CtxtMenu_MenuInputBox {  padding-left: 1em; right:.5em; color:#666666;  font-family: null;}
+.CtxtMenu_MenuInputBox.CtxtMenu_RTL {  left: .1em;}
+.CtxtMenu_MenuComboBox {  left:.1em; padding-bottom:.5em;}
+.CtxtMenu_MenuSlider {  left: .1em;}
+.CtxtMenu_SliderValue {  position:absolute; right:.1em; padding-top:.25em; color:#333333;  font-size: .75em}
+.CtxtMenu_SliderBar {  outline: none; background: #d3d3d3}
+.CtxtMenu_MenuLabel {  padding: 1px 2em 3px 1.33em;  font-style:italic}
+.CtxtMenu_MenuRule {  border-top: 1px solid #DDDDDD;  margin: 4px 3px;}
+.CtxtMenu_MenuDisabled {  color:GrayText}
+.CtxtMenu_MenuActive {  background-color: #606872;  color: white;}
+.CtxtMenu_MenuDisabled:focus {  background-color: #E8E8E8}
+.CtxtMenu_MenuLabel:focus {  background-color: #E8E8E8}
+.CtxtMenu_ContextMenu:focus {  outline:none}
+.CtxtMenu_ContextMenu .CtxtMenu_MenuItem:focus {  outline:none}
+.CtxtMenu_SelectionMenu {  position:relative; float:left;  border-bottom: none; -webkit-box-shadow:none; -webkit-border-radius:0px; }
+.CtxtMenu_SelectionItem {  padding-right: 1em;}
+.CtxtMenu_Selection {  right: 40%; width:50%; }
+.CtxtMenu_SelectionBox {  padding: 0em; max-height:20em; max-width: none;  background-color:#FFFFFF;}
+.CtxtMenu_SelectionDivider {  clear: both; border-top: 2px solid #000000;}
+.CtxtMenu_Menu .CtxtMenu_MenuClose {  top:-10px; left:-10px}
+</style><style id="MJX-CHTML-styles">
+mjx-container[jax="CHTML"] {
+  line-height: 0;
+}
+
+mjx-container [space="1"] {
+  margin-left: .111em;
+}
+
+mjx-container [space="2"] {
+  margin-left: .167em;
+}
+
+mjx-container [space="3"] {
+  margin-left: .222em;
+}
+
+mjx-container [space="4"] {
+  margin-left: .278em;
+}
+
+mjx-container [space="5"] {
+  margin-left: .333em;
+}
+
+mjx-container [rspace="1"] {
+  margin-right: .111em;
+}
+
+mjx-container [rspace="2"] {
+  margin-right: .167em;
+}
+
+mjx-container [rspace="3"] {
+  margin-right: .222em;
+}
+
+mjx-container [rspace="4"] {
+  margin-right: .278em;
+}
+
+mjx-container [rspace="5"] {
+  margin-right: .333em;
+}
+
+mjx-container [size="s"] {
+  font-size: 70.7%;
+}
+
+mjx-container [size="ss"] {
+  font-size: 50%;
+}
+
+mjx-container [size="Tn"] {
+  font-size: 60%;
+}
+
+mjx-container [size="sm"] {
+  font-size: 85%;
+}
+
+mjx-container [size="lg"] {
+  font-size: 120%;
+}
+
+mjx-container [size="Lg"] {
+  font-size: 144%;
+}
+
+mjx-container [size="LG"] {
+  font-size: 173%;
+}
+
+mjx-container [size="hg"] {
+  font-size: 207%;
+}
+
+mjx-container [size="HG"] {
+  font-size: 249%;
+}
+
+mjx-container [width="full"] {
+  width: 100%;
+}
+
+mjx-box {
+  display: inline-block;
+}
+
+mjx-block {
+  display: block;
+}
+
+mjx-itable {
+  display: inline-table;
+}
+
+mjx-row {
+  display: table-row;
+}
+
+mjx-row > * {
+  display: table-cell;
+}
+
+mjx-mtext {
+  display: inline-block;
+}
+
+mjx-mstyle {
+  display: inline-block;
+}
+
+mjx-merror {
+  display: inline-block;
+  color: red;
+  background-color: yellow;
+}
+
+mjx-mphantom {
+  visibility: hidden;
+}
+
+_::-webkit-full-page-media, _:future, :root mjx-container {
+  will-change: opacity;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-math {
+  display: inline-block;
+  text-align: left;
+  line-height: 0;
+  text-indent: 0;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 100%;
+  font-size-adjust: none;
+  letter-spacing: normal;
+  border-collapse: collapse;
+  word-wrap: normal;
+  word-spacing: normal;
+  white-space: nowrap;
+  direction: ltr;
+  padding: 1px 0;
+}
+
+mjx-container[jax="CHTML"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="CHTML"][display="true"][width="full"] {
+  display: flex;
+}
+
+mjx-container[jax="CHTML"][display="true"] mjx-math {
+  padding: 0;
+}
+
+mjx-container[jax="CHTML"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="CHTML"][justify="right"] {
+  text-align: right;
+}
+
+mjx-msup {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-mi {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-c {
+  display: inline-block;
+}
+
+mjx-utext {
+  display: inline-block;
+  padding: .75em 0 .2em 0;
+}
+
+mjx-mn {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-c::before {
+  display: block;
+  width: 0;
+}
+
+.MJX-TEX {
+  font-family: MJXZERO, MJXTEX;
+}
+
+.TEX-B {
+  font-family: MJXZERO, MJXTEX-B;
+}
+
+.TEX-I {
+  font-family: MJXZERO, MJXTEX-I;
+}
+
+.TEX-MI {
+  font-family: MJXZERO, MJXTEX-MI;
+}
+
+.TEX-BI {
+  font-family: MJXZERO, MJXTEX-BI;
+}
+
+.TEX-S1 {
+  font-family: MJXZERO, MJXTEX-S1;
+}
+
+.TEX-S2 {
+  font-family: MJXZERO, MJXTEX-S2;
+}
+
+.TEX-S3 {
+  font-family: MJXZERO, MJXTEX-S3;
+}
+
+.TEX-S4 {
+  font-family: MJXZERO, MJXTEX-S4;
+}
+
+.TEX-A {
+  font-family: MJXZERO, MJXTEX-A;
+}
+
+.TEX-C {
+  font-family: MJXZERO, MJXTEX-C;
+}
+
+.TEX-CB {
+  font-family: MJXZERO, MJXTEX-CB;
+}
+
+.TEX-FR {
+  font-family: MJXZERO, MJXTEX-FR;
+}
+
+.TEX-FRB {
+  font-family: MJXZERO, MJXTEX-FRB;
+}
+
+.TEX-SS {
+  font-family: MJXZERO, MJXTEX-SS;
+}
+
+.TEX-SSB {
+  font-family: MJXZERO, MJXTEX-SSB;
+}
+
+.TEX-SSI {
+  font-family: MJXZERO, MJXTEX-SSI;
+}
+
+.TEX-SC {
+  font-family: MJXZERO, MJXTEX-SC;
+}
+
+.TEX-T {
+  font-family: MJXZERO, MJXTEX-T;
+}
+
+.TEX-V {
+  font-family: MJXZERO, MJXTEX-V;
+}
+
+.TEX-VB {
+  font-family: MJXZERO, MJXTEX-VB;
+}
+
+mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
+  font-family: MJXZERO, MJXTEX-S1, MJXTEX-S4, MJXTEX, MJXTEX-A ! important;
+}
+
+@font-face /* 0 */ {
+  font-family: MJXZERO;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff") format("woff");
+}
+
+@font-face /* 1 */ {
+  font-family: MJXTEX;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff") format("woff");
+}
+
+@font-face /* 2 */ {
+  font-family: MJXTEX-B;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Bold.woff") format("woff");
+}
+
+@font-face /* 3 */ {
+  font-family: MJXTEX-I;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff") format("woff");
+}
+
+@font-face /* 4 */ {
+  font-family: MJXTEX-MI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Italic.woff") format("woff");
+}
+
+@font-face /* 5 */ {
+  font-family: MJXTEX-BI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-BoldItalic.woff") format("woff");
+}
+
+@font-face /* 6 */ {
+  font-family: MJXTEX-S1;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size1-Regular.woff") format("woff");
+}
+
+@font-face /* 7 */ {
+  font-family: MJXTEX-S2;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size2-Regular.woff") format("woff");
+}
+
+@font-face /* 8 */ {
+  font-family: MJXTEX-S3;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size3-Regular.woff") format("woff");
+}
+
+@font-face /* 9 */ {
+  font-family: MJXTEX-S4;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size4-Regular.woff") format("woff");
+}
+
+@font-face /* 10 */ {
+  font-family: MJXTEX-A;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_AMS-Regular.woff") format("woff");
+}
+
+@font-face /* 11 */ {
+  font-family: MJXTEX-C;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Regular.woff") format("woff");
+}
+
+@font-face /* 12 */ {
+  font-family: MJXTEX-CB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Bold.woff") format("woff");
+}
+
+@font-face /* 13 */ {
+  font-family: MJXTEX-FR;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Regular.woff") format("woff");
+}
+
+@font-face /* 14 */ {
+  font-family: MJXTEX-FRB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Bold.woff") format("woff");
+}
+
+@font-face /* 15 */ {
+  font-family: MJXTEX-SS;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Regular.woff") format("woff");
+}
+
+@font-face /* 16 */ {
+  font-family: MJXTEX-SSB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Bold.woff") format("woff");
+}
+
+@font-face /* 17 */ {
+  font-family: MJXTEX-SSI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Italic.woff") format("woff");
+}
+
+@font-face /* 18 */ {
+  font-family: MJXTEX-SC;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Script-Regular.woff") format("woff");
+}
+
+@font-face /* 19 */ {
+  font-family: MJXTEX-T;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Typewriter-Regular.woff") format("woff");
+}
+
+@font-face /* 20 */ {
+  font-family: MJXTEX-V;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Regular.woff") format("woff");
+}
+
+@font-face /* 21 */ {
+  font-family: MJXTEX-VB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff") format("woff");
+}
+
+mjx-c.mjx-c1D445.TEX-I::before {
+  padding: 0.683em 0.759em 0.021em 0;
+  content: "R";
+}
+
+mjx-c.mjx-c32::before {
+  padding: 0.666em 0.5em 0 0;
+  content: "2";
+}
+</style></head>
+<body data-new-gr-c-s-check-loaded="14.1168.0" data-gr-ext-installed="">
+    <h1>CS4641 Project: Flight Delay Predictor</h1>
+
+    <h3>Introduction/Background</h3>
+    <p>There exist sites, like <a href="https://wingman.wtf/">wingman.wtf</a> and <a href="https://www.knowdelay.com/index.html">knowdelay.com</a> that predict flight delays but are often too inaccurate to fully rely on. Scholarly articles that detail the use of ML in predicting flight delays generally focus on a single airport or airline, and use regression models like decision trees [1].</p>
+
+    <h3>Problem Definition</h3>
+    <p>Airline delays are a frustration for passengers, and because of the few resources available to accurately forecast potential delays, through this project, we aim to help travelers determine when delays are most likely to occur, and airports and airlines provide more reliable information about their operations.</p>
+
+    <h3>Methods</h3>
+    <h4>Data Preprocessing Methods</h4>
+    <ul>
+        <li><b>Data cleaning </b>ensured that our was free from outliers or incorrect/null data. We used the Pandas library, including dropna() and drop_duplicates(), to do this effectively. We also deleted outlier datapoints with delays over 500 minutes. For regressors, we changed datapoints with "negative" delays (the plane arrived early to the destination) to zero, since we did not care about predicting early flights.</li>
+        <li><b>Feature transformation</b> was used to scale the datetime data to two different ranges. The first scales the date (less the year) to a point on the unit circle with radius 1. The other maps the date to a value between 0 and 1, where closer to 0 is closer to the middle of winter and closer to 1 is closer to the middle of summer. Each airline's code was also mapped to a distinct number between 0 and 1.</li>
+        <li><b>Dimensionality reduction</b> was used to reduce the dataset to just a few essential attributes: to prevent overfitting while still considering the impact of eliminating features on the accuracy of our model [1]. We removed such attributes as origin city, amount of snow, and taxi out time. Overall we were left with the following columns: FL_DATE, AIRLINE_CODE, DEP_TIME, AIR_TIME, DISTANCE, DELAY, DEST_LAT, DEST_LNG, ORIGIN_LAT, ORIGIN_LNG, ARR_PRECIPITATION, ARR_SNOW_DEPTH. The reduced dataset makes it easier to determine which categories may hold a statistical relationship, though not all would be used in the same model (most likely) to prevent overrfitting.</li>
+        <li><b>Categorization</b>: When implementing random forest model, we assigned a category (e.g. DELAY, MINOR_DELAY, NO_DELAY, etc.) to each delay value (initially in minutes). This allowed us to use a group prediction algorithm, targeted on the delay value.</li>
+    </ul>
+
+    <h4>ML Algorithms/Models (supervised only)</h4>
+    <ul>
+        <li>Our initial approach made use of <b>linear regression</b> to attempt to predict the number of minutes a flight will be delayed. We chose this because we wanted to attempt a regression task, and thought linear regression would be a simple and good introduction to creating models and experimenting with optimization and using the libraries available.</li>
+        <li>For our second approach, we attempted to use a <b>random forest</b> model to classify flights into buckets. We wanted to experiment with a classification model to try and achieve higher accuracy. We chose random forests specifically because the use of ensemble learning from multiple decision trees helps improve accuracy </li>
+        <li>For our final approach, we used gradient boosting to implement another regression method. We chose this model because of its power to handle non-linear relationships, which was the main problem with our first model. Gradient-boosted regressors are also able to provide insights into feature importance, which is helpful for our dataset due to the large amount of features we have [3]. Finally, we chose this model because of its robustness to overfitting [4], which was a prominent problem that we noticed in our previous two models.</li>
+    </ul>
+
+    <h3>Results and Discussion</h3>
+    <h4>Linear Regression</h4>
+    <p>Our first model, linear regression, did not prove to be successful. Two trials were run: one with all 11 features present, and the other with just 7. The 7 most
+        important features were selected by performing forward feature selection on the training data. The regression
+        model was then fit to each of the two sets of training data, then used to predict delays for the remaining 20%
+        of the data (test set). The initial 80% of the data was the training set. Scikit-learn was the library used for this
+        implementation.</p>
+    <p>The mean square error (MSE) of the model run with all 11 features was 5333.013819648823, while the coefficient of determination (<mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="0" style="font-size: 117.4%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-msup><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D445 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: 0.363em;"><mjx-mn class="mjx-n" size="s"><mjx-c class="mjx-c32"></mjx-c></mjx-mn></mjx-script></mjx-msup></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>R</mi><mn>2</mn></msup></math></mjx-assistive-mml></mjx-container>) was 0.020891585241412658. The MSE of the model with 7 features was 5369.736086878915, while the <mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="1" style="font-size: 117.4%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-msup><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D445 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: 0.363em;"><mjx-mn class="mjx-n" size="s"><mjx-c class="mjx-c32"></mjx-c></mjx-mn></mjx-script></mjx-msup></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>R</mi><mn>2</mn></msup></math></mjx-assistive-mml></mjx-container> was 0.014149603677156453, indicating that 11 features is a slightly better fit. However, all of these error values are very high, indicating that linear regression is likely not a good model to use for predicting flight delays.</p>
+    <p>The following chart shows the actual vs predicted flight delays resulting from our model. While many of the delays are nearly accurate, there is also a significant proportion of outliers and points lying off the y=x line (100% accurate).</p>
+    <img src="./CS4641 Project_ Flight Delay Predictor_files/plot1.png">
+    <p>This chart shows the residuals (target value minus predicted value) for each predicted value. We can observe that the model consistently overestimates the predicted value, and this overestimation becomes greater as the predicted value increases (in a linear fashion). The units for the plot are minutes.</p>
+    <img src="./CS4641 Project_ Flight Delay Predictor_files/plot2.png">
+    <p>The final chart shows a histogram of all residual values. The plot is denser just to the left of zero, therefore the residual value is less than 0 most of the time, again indicating overestimation of delay time. The units for the plot are minutes.</p>
+    <img src="./CS4641 Project_ Flight Delay Predictor_files/plot3.png">
+    <br>
+
+    <h4>Gradient-boosted Regression</h4>
+    <p>For our second model, we decided to try gradient-boosted regression. The gradient-boosted regressor is an ensemble learning technique for regression, using multiple trees to better predict an output value. As our linear regression was ineffective, we felt using a gradient-boosted version may be able to capture more complex patterns in the data that would result in more accurate predictions. We began by implementing an initial regressor and analyzing where the model performed strongly and poorly before implementing feature selection. We then used tuning techniques like Grid Search to optimize our model's hyperparameters and maximize accuracy on the testing set.</p>
+    <p>Our primary measures of accuracy for the gradient-boosted regressor model were the mean squared error and the coefficient of determination (R-squared), which calculates the percent of variation in y (the response variable) accounted for by the model. Both of these measures of accuracy are directly integrated into the sci-kit learn package, which we used to build the GBR model. Our initial, un-optimized model had a paltry R-squared score of approximately -0.01, which means it performed worse than a straight line. Fearing that we were overfitting our model to the training set, we implemented feature selection using the feature importance scores of each of the features in our model, which included polynomial features and interaction effects.</p>
+    <img src="./CS4641 Project_ Flight Delay Predictor_files/plot4.png">
+    <p>This feature selection and alteration of hyperparameters boosted the R-squared to approximately 0.04, which was improved but still poor. So we decided to optimize our hyperparameters using cross-validation and tuning techniques to find the values for these parameters that minimized loss (MSE) on the validation set. We began by trying to optimize the number of trees/estimators, by plotting the training versus validation errors when fitting the model for 1-500 trees, in intervals of 10. This helped reduce the MSE by 2.38%.</p>
+    <img src="./CS4641 Project_ Flight Delay Predictor_files/plot5.png"><img src="./CS4641 Project_ Flight Delay Predictor_files/plot6.png">
+    <p>We continued by trying to optimize the coefficient of determination, which we achieved using grid search and cross validation. Unfortunately, since we introduced cross-validation to the picture, our MSE increased from 3932.72 to 4026.32!</p>
+    <p>Our next effort was to optimize the learning rate, which we achieved again by plotting a wide range of possible values. We managed to reduce the MSE to 3884.75.</p>
+    <img src="./CS4641 Project_ Flight Delay Predictor_files/plot7.png">
+    <p>Our final effort was to optimize the maximum tree depth. This was achieved by plotting a grid search and cross validation. The final MSE was determined to be 3421.60.</p>
+    <img src="./CS4641 Project_ Flight Delay Predictor_files/plot8.png">
+    <p>Overall, we found that a learning rate of 0.06, a maximum tree depth of 5, the number of trees to be 90, and minimum sample split of 10 to be optimal. However, after this lengthy process, we were able to minimize loss, improving our R-squared to roughly 0.06, meaning that optimizing the hyperparameters increased our coefficient of determination by ~50%. While this was a stark improvement on the untuned model, but still extremely unreliable as a predictor of flight delays. Based on these results, we believe that the GBR model, like its simpler linear regression cousin, was suffering from overfitting and noise. Although additional data preprocessing and dimensionality reduction may have been able to improve the model further, we determined that the regression route was simply not a very accurate method of prediction for this problem. We decided to abandon the idea and instead approach the problem as a classification one, choosing to classify flights into various buckets of delay lengths. We felt that this would maintain the functionality of our solution, as, if implemented correctly, such a model would still be highly valuable for travelers but would be less prone to the overfitting that occurred with our regression models, and less sensitive to outliers.</p>
+    
+    <br>
+    <h4>Random Forests</h4>
+    <p>The random forest model utilizes the output of multiple decision trees to classify a flight as delayed, early, or one of several other categories. The first trial used arbitrary delay values (in minutes) to separate the delays into categories. The random forest model was then trained on an evenly split delay categorization into four categories. Then this was done on two categories. Finally, an analysis was done to determine the most "important" attributes in the dataset, and these attributes were increasingly added to the arbitrary delay classification to increase the model's accuracy.</p>
+    <p>The primary way to measure the accuracy of the Random Forest model was the accuracy score from the sklearn.metrics package. This function computes the number of correctly assigned labels over the total number of labels. For classification, a category is either right or wrong, so distance from the correct answer does not matter, so mean squared error is not appropriate in this case.
+        The accuracy of the first run with arbitrary labels (numbers that seemed right which we made up) was 39.72%. For the four evenly spaced categories, we got 25.98% accuracy, and 55.97% accuracy for the two categories. The two evenly spaced categorizations were each just slightly better than 1/n, where n is the number of categories, so not ideal. After determining the most important features, we were able to increase the accuracy to a final value of 48.27% for the eight most important features. 
+        The primary method of displaying the results is through a confusion matrix, which has the true labels on the y axis and predicted labels on the x axis. A perfectly categorized model would have 1.0 as the value in each box along the diagonal from the upper left to the lower right. The higher the values along this diagonal, the better the model. The following confusion matrices are labeled with information about that trial.</p>
+    <p>Confusion matrix 1: Arbitrary delay categorization, accuracy 39.72%</p>
+    <img src="./CS4641 Project_ Flight Delay Predictor_files/plot9.png">
+    <p>Confusion matrix 2: 4 even categories, accuracy 25.98%</p>
+    <img src="./CS4641 Project_ Flight Delay Predictor_files/plot10.png">
+    <p>Confusion matrix 3: 2 even categories, accuracy 55.97%</p>
+    <img src="./CS4641 Project_ Flight Delay Predictor_files/plot11.png">
+    <p>Confusion matrix 4: Arbitrary delay categorization, top 4 attributes, accuracy 43.64%</p>
+    <img src="./CS4641 Project_ Flight Delay Predictor_files/plot12.png">
+    <p>Confusion matrix 5: Arbitrary delay categorization, top 6 attributes, 45.60%</p>
+    <img src="./CS4641 Project_ Flight Delay Predictor_files/plot13.png">
+    <p>Confusion matrix 6: Arbitrary delay categorization, top 8 attributes, accuracy 48.27%</p>
+    <img src="./CS4641 Project_ Flight Delay Predictor_files/plot14.png">
+    <p>The following chart shows the relative importance of each attribute in the dataset. This was used to determine which features to add to the Random Forest classifier after determining how best to categorize the delays.</p>
+    <img src="./CS4641 Project_ Flight Delay Predictor_files/plot15.png">
+
+    <h4>Overall Comparison</h4>
+    <p>Disappointingly, both our regression models performed very poorly. As mentioned before, the accuracy and reliability of our models were likely impacted by a poor dataset and/or insufficient data cleaning. We also should have tried to use more data, as the size of our dataset was very manageable and likely would have benefitted from expansion. While we predicted that our gradient-boosted regressor would help overcome some of the shortcomings of our linear regressor, namely overfitting and non-linear relationships, unfortunately this was not the case, as the MSE was only reduced from 4026 to 3421, which is a 15% reduction, but still resulted in a very high MSE value. Our attempt at a classifier proved to be slightly more successful with a decent accuracy rate, although still far too low to be considered anything close to reliable.</p>
+
+    <h4>Next Steps</h4>
+    <p>If we are to build upon this project in the future, we would try likely try to implement gradient-boosted decision trees. This model would build upon our previous work, and is a complex model that has been shown to be effective at modeling flight delays. We would also dedicate more time to data preprocessing, to eliminate more inconsistencies in the dataset. We would likely also need to find a more sophisticated/accurate way to encode the location of each airport, as well as the date to accurately reflect the season. We would likely also use a much larger dataset, and spend more time analyzing which features can be optimized.</p>
+
+    <h3>References</h3>
+        <p>[1] H. S. Obaid, S. A. Dheyab and S. S. Sabry, "The Impact of Data Pre-Processing Techniques and Dimensionality Reduction on the Accuracy of Machine Learning," 2019 9th Annual Information Technology, Electromechanical Engineering and Microelectronics Conference (IEMECON), Jaipur, India, 2019, pp. 279-283, doi: 10.1109/IEMECONX.2019.8877011.</p>
+        <p>[2] H. Khaksar and A. Sheikholeslami, “Airline delay prediction by machine learning algorithms,” Scientia Iranica, vol. 0, no. 0, pp. 0–0, Dec. 2017. doi:10.24200/sci.2017.20020</p>
+        <p>[3] S. Manna, S. Biswas, R. Kundu, S. Rakshit, P. Gupta and S. Barman, "A statistical approach
+            to predict flight delay using gradient boosted decision tree," 2017 International Conference
+            on Computational Intelligence in Data Science(ICCIDS), Chennai, India, 2017, pp. 1-5, doi:
+            10.1109/ICCIDS.2017.8272656.</p>
+        <p>[4] M. Lu, P. Wei, M. He and Y. Teng, "Flight Delay Prediction Using Gradient Boosting Machine Learning", Lu, M., Wei, P., He, M., &amp; Teng, Y. (2021). Flight Delay Prediction Using Gradient Boosting Machine Learning Classifiers. Journal of Quantum Computing, 2021, doi: 10.32604/jqc.2021.016315
+            Classifiers"</p>
+            <p></p>
+
+    <h2>Team Contribution Table</h2>
+    <table>
+        <tbody><tr>
+            <th>Name</th>
+            <th>Proposal Contributions</th>
+        </tr>
+        <tr>
+            <td>Addy Yang</td>
+            <td>Implementing gradient-boosting, creating slides and report</td>
+        </tr>
+        <tr>
+            <td>Rohan Bhagat</td>
+            <td>Implementing gradient-boosting, creating slides and recording video</td>
+        </tr>
+        <tr>
+            <td>Dhruv Shrivastava</td>
+            <td>Implementing gradient-boosting and recording video</td>
+        </tr>
+        <tr>
+            <td>Aidan Pratt</td>
+            <td>Implementing random forests</td>
+        </tr>
+        <tr>
+            <td>Teddy Feldman</td>
+            <td>Implementing random forests and creating report</td>
+        </tr>
+    </tbody></table>
+
+</body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
+      div.grammarly-desktop-integration {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select:none;
+        user-select:none;
+      }
+
+      div.grammarly-desktop-integration:before {
+        content: attr(data-content);
+      }
+    </style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>
